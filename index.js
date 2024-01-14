@@ -37,11 +37,13 @@ import inquirer from 'inquirer';
       default: 'VNDB - Names'
     },
     {
+      type: "number",
       name: 'width',
       message: 'Width of the images',
       default: '50'
     },
     {
+      type: "number",
       name: 'height',
       message: 'Height of the images',
       default: '50'
@@ -219,4 +221,8 @@ import inquirer from 'inquirer';
   zip.writeZip(`./${inquiry.zip}`);
     console.log('Done exporting!');
     console.table(stats);
+    fs.rmSync("images", {
+        recursive: true,
+        force: true
+    });
 })();

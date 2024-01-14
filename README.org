@@ -2,10 +2,17 @@
 
 Make a yomitan dictionary from VNDB Character pages !
 
-TODO: Spoiler levels
-
 [[file:screenshot.png]]
 
 ** How to use/Installation Building thing
+*** From binary:
+TODO
+*** From source:
+#+begin_src bash
+git clone https://github.com/asayake-b5/yomitan-vndb.git
+cd yomitan-vndb
+npm i
+npm run vndb
+#+end_src
 ** Thanks
 https://github.com/MarvNC/yomichan-dict-builder/tree/master

@@ -2,10 +2,13 @@
   "name": "vndb-yomitan",
   "version": "1.0.0",
   "type": "module",
+  "bin": {
+    "vndb": "./index.js"
+  },
   "description": "Create yomitan dictionaries from VNDB’s character data",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vndb": "node index.js"
   },
   "author": "",
   "license": "MIT",
@@ -14,6 +17,7 @@
     "cheerio": "^1.0.0-rc.12",
     "cheerio-json-mapper": "^1.0.3",
     "inquirer": "^9.2.12",
+    "nexe": "^4.0.0-rc.4",
     "node-downloader-helper": "^2.1.9",
     "yomichan-dict-builder": "^2.0.2"
   },
