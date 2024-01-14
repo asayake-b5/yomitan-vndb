@@ -1,0 +1,11 @@
+* VNDB To Yomitan
+
+Make a yomitan dictionary from VNDB Character pages !
+
+TODO: Spoiler levels
+
+[[file:screenshot.png]]
+
+** How to use/Installation Building thing
+** Thanks
+https://github.com/MarvNC/yomichan-dict-builder/tree/master
