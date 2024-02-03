@@ -11,53 +11,21 @@ import {
 import {
     DownloaderHelper
 } from 'node-downloader-helper';
-import * as fs from 'fs';
+import * as fs from 'node:fs';
 import AdmZip from 'adm-zip';
 
-import inquirer from 'inquirer';
 
 (async () => {
 
-  //TODO ask for width/height size
-  const inquiry = await inquirer
-  .prompt([
-    {
-      name: 'vndb_id',
-      message: 'ID of the visual novel on vndb (eg vXXX)',
-      default: 'v001'
-    },
-    {
-      name: 'zip',
-      message: 'name of the zip file',
-      default: 'dict.zip'
-    },
-    {
-      name: 'dict_name',
-      message: 'Name of the dictionary as displayed in yomitan, shorthand of your VN recommended',
-      default: 'VNDB - Names'
-    },
-    {
-      type: "number",
-      name: 'width',
-      message: 'Width of the images',
-      default: '50'
-    },
-    {
-      type: "number",
-      name: 'height',
-      message: 'Height of the images',
-      default: '50'
-    },
-  ])
-  .then(answers => {
-    return answers
-  });
+  const vndb_id = process.argv[2];
+  const zip_name = process.argv[3];
+  const dict_name = process.argv[4];
 
     const dictionary = new Dictionary({
-      fileName: inquiry.zip,
+      fileName: zip_name,
     });
 
-  const url = `https://vndb.org/${inquiry.vndb_id}/chars?view=0S-D0gqwdpO#chars`;
+  const url = `https://vndb.org/${vndb_id}/chars?view=0S-D0gqwdpO#chars`;
     const html = await fetch(url)
         .then(function(response) {
             return response.text()
@@ -107,8 +75,8 @@ import inquirer from 'inquirer';
 
     // index
     const index = new DictionaryIndex()
-        .setTitle(inquiry.dict_name)
-        .setRevision(`1.0vndb-${inquiry.dict_name}`)
+        .setTitle(dict_name)
+        .setRevision(`1.0vndb-${dict_name}`)
         .setAuthor('Asayake')
         .setDescription(`VNDB Deck of names for ${results.title}`)
         .setAttribution('test')
@@ -216,9 +184,9 @@ import inquirer from 'inquirer';
         await new Promise(r => setTimeout(r, 1000));
 
     const stats = await dictionary.export('./');
-  var zip = new AdmZip(`./${inquiry.zip}`);
+  var zip = new AdmZip(`./${zip_name}`);
   zip.addLocalFolder("images", "images");
-  zip.writeZip(`./${inquiry.zip}`);
+  zip.writeZip(`./${zip_name}`);
     console.log('Done exporting!');
     console.table(stats);
     fs.rmSync("images", {
