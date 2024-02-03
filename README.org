@@ -6,13 +6,24 @@ Make a yomitan dictionary from VNDB Character pages !
 
 ** How to use/Installation Building thing
 *** From binary:
-TODO
+**** Linux (x64)
+Needs gtk installed
+- Download [[https://github.com/asayake-b5/yomitan-vndb/releases/download/1.0/linux_amd64.zip][the release here]]
+- Unzip
+- Double click =frontend=
+
 *** From source:
+Needs node21
 #+begin_src bash
 git clone https://github.com/asayake-b5/yomitan-vndb.git
 cd yomitan-vndb
-npm i
-npm run vndb
+npm run build
+node --experimental-sea-config sea-config.json
+npx postject yomitan NODE_SEA_BLOB sea-prep.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2 --overwrite
+cd frontend
+cargo build --release
+<cp whatever output is relevant in target to the same directory of the yomitan you just built>
+./frontend
 #+end_src
 ** Thanks
 https://github.com/MarvNC/yomichan-dict-builder/tree/master
